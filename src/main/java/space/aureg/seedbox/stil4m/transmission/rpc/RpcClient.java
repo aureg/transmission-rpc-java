@@ -1,15 +1,15 @@
 package space.aureg.seedbox.stil4m.transmission.rpc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import space.aureg.seedbox.stil4m.transmission.http.InvalidResponseStatus;
-import space.aureg.seedbox.stil4m.transmission.http.RequestExecutor;
-import space.aureg.seedbox.stil4m.transmission.http.RequestExecutorException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import space.aureg.seedbox.stil4m.transmission.http.InvalidResponseStatus;
+import space.aureg.seedbox.stil4m.transmission.http.RequestExecutor;
+import space.aureg.seedbox.stil4m.transmission.http.RequestExecutorException;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -62,7 +62,7 @@ public class RpcClient {
 
         Map args = (Map) response.getArguments();
         String stringValue = objectMapper.writeValueAsString(args);
-        System.err.println(stringValue);
+        //System.err.println(stringValue);
         response.setArguments((V) objectMapper.readValue(stringValue, command.getArgumentsObject()));
         if (!command.getTag().equals(response.getTag())) {
             throw new RpcException(String.format("Invalid response tag. Expected %d, but got %d", command.getTag(), request.getTag()));
